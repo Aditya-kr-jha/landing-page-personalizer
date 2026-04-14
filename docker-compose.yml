@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ad-personalizer-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/app/.env
+    # The backend is intentionally isolated to the docker network.
+    # Expose port 8000 internally so nginx can reverse proxy to it.
+    expose:
+      - "8000"
+    networks:
+      - ad-personalizer-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ad-personalizer-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - ad-personalizer-net
+
+networks:
+  ad-personalizer-net:
+    driver: bridge

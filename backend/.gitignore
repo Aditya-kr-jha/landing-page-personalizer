@@ -1,0 +1,23 @@
+.env.*
+app/.env
+backend/app/.env
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Environment variables
+.env
+.env.local
+
+# AWS credentials
+aws_credentials.json
+.aws/app/.env
+backend/app/.env
+
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/Lumina/node_modules/
+frontend/Lumina/dist/
+frontend/Lumina/.env.local
