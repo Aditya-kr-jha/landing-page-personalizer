@@ -54,9 +54,7 @@ class EditGenerationChain:
     ) -> None:
         self.model = model or settings.EDIT_AGENT_MODEL
         self.temperature = (
-            temperature
-            if temperature is not None
-            else settings.EDIT_AGENT_TEMPERATURE
+            temperature if temperature is not None else settings.EDIT_AGENT_TEMPERATURE
         )
 
         self._llm = ChatOpenAI(
@@ -122,8 +120,7 @@ class EditGenerationChain:
         )
 
         logger.debug(
-            "Edit generation complete: %d edits, confidence=%.2f, "
-            "warnings=%d",
+            "Edit generation complete: %d edits, confidence=%.2f, " "warnings=%d",
             len(result.edits),
             result.confidence,
             len(result.warnings),
@@ -168,11 +165,13 @@ class EditGenerationChain:
             text = s.text_content
             if len(text) > _MAX_SECTION_TEXT_LEN:
                 text = text[:_MAX_SECTION_TEXT_LEN] + "…"
-            sections_data.append({
-                "section_id": s.section_id,
-                "section_type": s.section_type.value,
-                "text_content": text,
-            })
+            sections_data.append(
+                {
+                    "section_id": s.section_id,
+                    "section_type": s.section_type.value,
+                    "text_content": text,
+                }
+            )
         return json.dumps(sections_data, indent=2)
 
     @staticmethod

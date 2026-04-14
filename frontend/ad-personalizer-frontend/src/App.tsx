@@ -192,7 +192,7 @@ export default function App() {
                 padding: '14px 36px',
                 borderRadius: 'var(--radius-xl)',
                 gap: 10,
-                boxShadow: canSubmit && appState !== 'loading' ? '0 4px 24px var(--accent-glow)' : 'none',
+                boxShadow: canSubmit ? '0 4px 24px var(--accent-glow)' : 'none',
                 minWidth: 220,
               }}
             >
